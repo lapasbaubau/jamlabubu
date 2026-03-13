@@ -6,6 +6,7 @@
 <title>Jadwal Meeting</title>
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -18,28 +19,50 @@ html,body{
   overflow:hidden;
 }
 
+/* default untuk laptop / desktop */
 .wrapper{
   width:100vw;
   height:100vh;
-  transform: scale(0.85);      /* ubah 0.80 atau 0.85 sesuai kebutuhan */
+  transform: scale(0.85);
   transform-origin: top left;
 }
 
 iframe{
-  width:117.65vw;              /* 100 / 0.85 agar tetap penuh */
+  width:117.65vw;
   height:117.65vh;
   border:none;
 }
+
+/* khusus layar HP */
+@media (max-width:768px){
+
+  html,body{
+    overflow:auto;
+  }
+
+  .wrapper{
+    transform: scale(1);   /* tidak di-zoom */
+    width:100vw;
+    height:100vh;
+  }
+
+  iframe{
+    width:100vw;
+    height:100vh;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="wrapper">
-<iframe 
-src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
-allowfullscreen>
-</iframe>
+  <iframe 
+  src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
+  allowfullscreen>
+  </iframe>
 </div>
 
 </body>
