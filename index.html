@@ -6,36 +6,41 @@
 <title>Jadwal Meeting</title>
 
 <style>
-  *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-  }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  html, body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family: Arial, sans-serif;
-  }
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
 
-  iframe{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    border:none;
-  }
+.wrapper{
+  width:100vw;
+  height:100vh;
+  transform: scale(0.85);      /* ubah 0.80 atau 0.85 sesuai kebutuhan */
+  transform-origin: top left;
+}
+
+iframe{
+  width:117.65vw;              /* 100 / 0.85 agar tetap penuh */
+  height:117.65vh;
+  border:none;
+}
 </style>
 </head>
 
 <body>
 
+<div class="wrapper">
 <iframe 
 src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
 allowfullscreen>
 </iframe>
+</div>
 
 </body>
 </html>
