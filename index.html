@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Jadwal Meeting</title>
 
 <style>
@@ -22,7 +21,7 @@ overflow:hidden;
 background:#fff;
 }
 
-/* SPLASH SCREEN */
+/* SPLASH */
 
 #splash{
 position:fixed;
@@ -40,27 +39,29 @@ animation:bgMove 8s ease infinite;
 z-index:9999;
 }
 
-/* animasi background */
 @keyframes bgMove{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
 
-/* logo */
+/* LOGO */
 
 .logo{
-width:260px;
-animation:logoZoom 1.5s ease forwards,
-           logoFloat 3s ease-in-out infinite;
-filter:drop-shadow(0 0 25px rgba(255,255,255,0.8));
+max-width:180px;        /* diperkecil agar tajam */
+width:40vw;
+height:auto;
+image-rendering:auto;
+animation:logoZoom 1.2s ease forwards,
+          logoFloat 3s ease-in-out infinite;
+filter:drop-shadow(0 0 15px rgba(255,255,255,0.7));
 }
 
-/* zoom masuk */
+/* zoom lebih kecil agar tidak blur */
 
 @keyframes logoZoom{
 0%{
-transform:scale(0.3);
+transform:scale(0.7);
 opacity:0;
 }
 100%{
@@ -69,26 +70,20 @@ opacity:1;
 }
 }
 
-/* efek melayang */
-
 @keyframes logoFloat{
-0%,100%{
-transform:translateY(0);
-}
-50%{
-transform:translateY(-15px);
-}
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
 }
 
-/* spinner modern */
+/* spinner */
 
 .loader{
-margin-top:40px;
-width:60px;
-height:60px;
+margin-top:30px;
+width:50px;
+height:50px;
 border-radius:50%;
-border:6px solid rgba(255,255,255,0.3);
-border-top:6px solid #ffffff;
+border:5px solid rgba(255,255,255,0.3);
+border-top:5px solid #ffffff;
 animation:spin 1s linear infinite;
 }
 
@@ -104,16 +99,12 @@ width:100%;
 height:100vh;
 }
 
-/* zoom laptop */
-
 @media (min-width:769px){
 .container{
 zoom:85%;
 height:118vh;
 }
 }
-
-/* HP */
 
 @media (max-width:768px){
 
@@ -139,7 +130,6 @@ border:none;
 
 <body>
 
-<!-- SPLASH -->
 <div id="splash">
 
 <img class="logo"
@@ -150,7 +140,6 @@ src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/buk
 </div>
 
 
-<!-- APLIKASI -->
 <div class="container">
 
 <iframe
@@ -162,8 +151,6 @@ allowfullscreen>
 
 
 <script>
-
-/* hilangkan splash setelah 3 detik */
 
 setTimeout(function(){
 
