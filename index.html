@@ -1,184 +1,205 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jadwal Meeting</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jadwal Meeting</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
+    html,body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:#fff;
+    }
 
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#fff;
-}
+    #splash{
+      position:fixed;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(45deg,#003366,#0055aa,#0077cc,#003366);
+      background-size:400% 400%;
+      animation:bgMove 8s ease infinite;
+      z-index:9999;
+      transition:opacity 1s ease;
+    }
 
-#splash{
-  position:fixed;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(45deg,#003366,#0055aa,#0077cc,#003366);
-  background-size:400% 400%;
-  animation:bgMove 8s ease infinite;
-  z-index:9999;
-}
+    @keyframes bgMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+    .logo{
+      max-width:180px;
+      width:40vw;
+      height:auto;
+      animation:logoZoom 1.2s ease forwards, logoFloat 3s ease-in-out infinite;
+      filter:drop-shadow(0 0 15px rgba(255,255,255,0.7));
+    }
 
-.logo{
-  max-width:180px;
-  width:40vw;
-  height:auto;
-  animation:logoZoom 1.2s ease forwards, logoFloat 3s ease-in-out infinite;
-  filter:drop-shadow(0 0 15px rgba(255,255,255,0.7));
-}
+    @keyframes logoZoom{
+      0%{transform:scale(0.7);opacity:0;}
+      100%{transform:scale(1);opacity:1;}
+    }
 
-@keyframes logoZoom{
-  0%{transform:scale(0.7);opacity:0;}
-  100%{transform:scale(1);opacity:1;}
-}
+    @keyframes logoFloat{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-10px);}
+    }
 
-@keyframes logoFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
+    .loader{
+      margin-top:24px;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:5px solid rgba(255,255,255,0.3);
+      border-top:5px solid #ffffff;
+      animation:spin 1s linear infinite;
+    }
 
-.loader{
-  margin-top:24px;
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  border:5px solid rgba(255,255,255,0.3);
-  border-top:5px solid #ffffff;
-  animation:spin 1s linear infinite;
-}
+    @keyframes spin{
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+    }
 
-@keyframes spin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
+    .start-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,0.25);
+      backdrop-filter:blur(2px);
+    }
 
-.start-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,0.25);
-  backdrop-filter:blur(2px);
-}
+    .start-btn{
+      border:none;
+      padding:16px 28px;
+      border-radius:999px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      background:#ffffff;
+      color:#003366;
+      box-shadow:0 8px 24px rgba(0,0,0,0.25);
+      animation:pulse 1.5s infinite;
+    }
 
-.start-btn{
-  border:none;
-  padding:16px 28px;
-  border-radius:999px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  background:#ffffff;
-  color:#003366;
-  box-shadow:0 8px 24px rgba(0,0,0,0.25);
-  animation:pulse 1.5s infinite;
-}
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.05);}
+      100%{transform:scale(1);}
+    }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
-}
+    .container{
+      width:100%;
+      height:100vh;
+    }
 
-.container{
-  width:100%;
-  height:100vh;
-}
+    @media (min-width:769px){
+      .container{
+        zoom:85%;
+        height:118vh;
+      }
+    }
 
-@media (min-width:769px){
-  .container{
-    zoom:85%;
-    height:118vh;
-  }
-}
+    @media (max-width:768px){
+      html,body{
+        overflow:auto;
+      }
+      .container{
+        zoom:100%;
+        height:100vh;
+      }
+    }
 
-@media (max-width:768px){
-  html,body{
-    overflow:auto;
-  }
-  .container{
-    zoom:100%;
-    height:100vh;
-  }
-}
-
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  display:block;
-}
-</style>
+    iframe{
+      width:100%;
+      height:100%;
+      border:none;
+      display:block;
+    }
+  </style>
 </head>
 <body>
 
-<div id="splash">
-  <img class="logo" src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/bukutamu.png" alt="Splash">
-  <div class="loader"></div>
+  <div id="splash">
+    <img class="logo" src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/bukutamu.png" alt="Splash">
+    <div class="loader"></div>
 
-  <div class="start-overlay" id="startOverlay">
-    <button class="start-btn" id="startBtn">Klik untuk Mulai</button>
+    <div class="start-overlay" id="startOverlay">
+      <button class="start-btn" id="startBtn" type="button">Klik untuk Mulai</button>
+    </div>
   </div>
-</div>
 
-<audio id="splashAudio" preload="auto">
-  <source src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/VOICEJAMLABUBU.WAV" type="audio/wav">
-</audio>
+  <audio id="splashAudio" preload="auto">
+    <source src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/VOICEJAMLABUBU.WAV" type="audio/wav">
+    Browser Anda tidak mendukung audio.
+  </audio>
 
-<div class="container">
-  <iframe
-    src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
-    allowfullscreen>
-  </iframe>
-</div>
+  <div class="container">
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
+      allowfullscreen>
+    </iframe>
+  </div>
 
-<script>
-const splash = document.getElementById("splash");
-const audio = document.getElementById("splashAudio");
-const startBtn = document.getElementById("startBtn");
-const startOverlay = document.getElementById("startOverlay");
+  <script>
+    const splash = document.getElementById("splash");
+    const audio = document.getElementById("splashAudio");
+    const startBtn = document.getElementById("startBtn");
+    const startOverlay = document.getElementById("startOverlay");
 
-startBtn.addEventListener("click", async function () {
-  try {
-    audio.currentTime = 0;
-    await audio.play();
-  } catch (e) {
-    console.log("Audio gagal diputar:", e);
-  }
+    let started = false;
 
-  startOverlay.style.display = "none";
+    function startApp() {
+      if (started) return;
+      started = true;
 
-  setTimeout(function(){
-    splash.style.transition = "opacity 1s ease";
-    splash.style.opacity = "0";
+      startOverlay.style.display = "none";
 
-    setTimeout(function(){
-      splash.style.display = "none";
-    }, 1000);
-  }, 2500);
-});
-</script>
+      try {
+        audio.currentTime = 0;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise.catch(function(err) {
+            console.log("Audio gagal diputar:", err);
+          });
+        }
+      } catch (err) {
+        console.log("Audio error:", err);
+      }
+
+      setTimeout(function () {
+        splash.style.opacity = "0";
+
+        setTimeout(function () {
+          splash.style.display = "none";
+        }, 1000);
+      }, 2500);
+    }
+
+    startBtn.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      startApp();
+    });
+
+    startOverlay.addEventListener("click", function(){
+      startApp();
+    });
+  </script>
 
 </body>
 </html>
