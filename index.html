@@ -20,13 +20,9 @@ html,body{
   background:#fff;
 }
 
-/* SPLASH */
 #splash{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -43,35 +39,26 @@ html,body{
   100%{background-position:0% 50%}
 }
 
-/* LOGO */
 .logo{
   max-width:180px;
   width:40vw;
   height:auto;
-  image-rendering:auto;
   animation:logoZoom 1.2s ease forwards, logoFloat 3s ease-in-out infinite;
   filter:drop-shadow(0 0 15px rgba(255,255,255,0.7));
 }
 
 @keyframes logoZoom{
-  0%{
-    transform:scale(0.7);
-    opacity:0;
-  }
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
+  0%{transform:scale(0.7);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
 }
 
 @keyframes logoFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
 }
 
-/* loader */
 .loader{
-  margin-top:30px;
+  margin-top:24px;
   width:50px;
   height:50px;
   border-radius:50%;
@@ -81,11 +68,39 @@ html,body{
 }
 
 @keyframes spin{
-  0%{transform:rotate(0deg)}
-  100%{transform:rotate(360deg)}
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
 }
 
-/* container aplikasi */
+.start-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(2px);
+}
+
+.start-btn{
+  border:none;
+  padding:16px 28px;
+  border-radius:999px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#ffffff;
+  color:#003366;
+  box-shadow:0 8px 24px rgba(0,0,0,0.25);
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
+
 .container{
   width:100%;
   height:100vh;
@@ -102,7 +117,6 @@ html,body{
   html,body{
     overflow:auto;
   }
-
   .container{
     zoom:100%;
     height:100vh;
@@ -117,12 +131,15 @@ iframe{
 }
 </style>
 </head>
-
 <body>
 
 <div id="splash">
   <img class="logo" src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/bukutamu.png" alt="Splash">
   <div class="loader"></div>
+
+  <div class="start-overlay" id="startOverlay">
+    <button class="start-btn" id="startBtn">Klik untuk Mulai</button>
+  </div>
 </div>
 
 <audio id="splashAudio" preload="auto">
@@ -137,32 +154,30 @@ iframe{
 </div>
 
 <script>
-const audio = document.getElementById("splashAudio");
 const splash = document.getElementById("splash");
+const audio = document.getElementById("splashAudio");
+const startBtn = document.getElementById("startBtn");
+const startOverlay = document.getElementById("startOverlay");
 
-/* coba putar suara saat splash muncul */
-window.addEventListener("load", function () {
-  audio.play().catch(function(err){
-    console.log("Autoplay diblokir browser:", err);
-  });
-});
-
-/* cadangan: jika user klik layar, audio ikut jalan */
-document.addEventListener("click", function(){
-  if (audio.paused) {
-    audio.play().catch(function(){});
+startBtn.addEventListener("click", async function () {
+  try {
+    audio.currentTime = 0;
+    await audio.play();
+  } catch (e) {
+    console.log("Audio gagal diputar:", e);
   }
-}, { once:true });
 
-/* hilangkan splash */
-setTimeout(function(){
-  splash.style.opacity = "0";
-  splash.style.transition = "opacity 1s";
+  startOverlay.style.display = "none";
 
   setTimeout(function(){
-    splash.style.display = "none";
-  },1000);
-},3000);
+    splash.style.transition = "opacity 1s ease";
+    splash.style.opacity = "0";
+
+    setTimeout(function(){
+      splash.style.display = "none";
+    }, 1000);
+  }, 2500);
+});
 </script>
 
 </body>
