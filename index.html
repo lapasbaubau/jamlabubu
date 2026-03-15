@@ -143,7 +143,7 @@
   </div>
 
   <audio id="splashAudio" preload="auto">
-    <source src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/VOICEJAMLABUBU.WAV" type="audio/wav">
+    <source src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/VOICEJAMLABUBU.mp3" type="audio/mpeg">
     Browser Anda tidak mendukung audio.
   </audio>
 
@@ -168,22 +168,13 @@
 
       startOverlay.style.display = "none";
 
-      try {
-        audio.currentTime = 0;
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-          playPromise.catch(function(err) {
-            console.log("Audio gagal diputar:", err);
-          });
-        }
-      } catch (err) {
-        console.log("Audio error:", err);
-      }
+      audio.currentTime = 0;
+      audio.play().catch(function(err){
+        console.log("Audio gagal diputar:", err);
+      });
 
       setTimeout(function () {
         splash.style.opacity = "0";
-
         setTimeout(function () {
           splash.style.display = "none";
         }, 1000);
