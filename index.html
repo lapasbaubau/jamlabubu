@@ -6,163 +6,163 @@
 <title>Jadwal Meeting</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
 html,body{
-width:100%;
-height:100%;
-overflow:hidden;
-background:#fff;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#fff;
 }
 
 /* SPLASH */
-
 #splash{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-background:linear-gradient(45deg,#003366,#0055aa,#0077cc,#003366);
-background-size:400% 400%;
-animation:bgMove 8s ease infinite;
-z-index:9999;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(45deg,#003366,#0055aa,#0077cc,#003366);
+  background-size:400% 400%;
+  animation:bgMove 8s ease infinite;
+  z-index:9999;
 }
 
 @keyframes bgMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* LOGO */
-
 .logo{
-max-width:180px;        /* diperkecil agar tajam */
-width:40vw;
-height:auto;
-image-rendering:auto;
-animation:logoZoom 1.2s ease forwards,
-          logoFloat 3s ease-in-out infinite;
-filter:drop-shadow(0 0 15px rgba(255,255,255,0.7));
+  max-width:180px;
+  width:40vw;
+  height:auto;
+  image-rendering:auto;
+  animation:logoZoom 1.2s ease forwards, logoFloat 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 15px rgba(255,255,255,0.7));
 }
-
-/* zoom lebih kecil agar tidak blur */
 
 @keyframes logoZoom{
-0%{
-transform:scale(0.7);
-opacity:0;
-}
-100%{
-transform:scale(1);
-opacity:1;
-}
+  0%{
+    transform:scale(0.7);
+    opacity:0;
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
 }
 
 @keyframes logoFloat{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
 }
 
-/* spinner */
-
+/* loader */
 .loader{
-margin-top:30px;
-width:50px;
-height:50px;
-border-radius:50%;
-border:5px solid rgba(255,255,255,0.3);
-border-top:5px solid #ffffff;
-animation:spin 1s linear infinite;
+  margin-top:30px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:5px solid rgba(255,255,255,0.3);
+  border-top:5px solid #ffffff;
+  animation:spin 1s linear infinite;
 }
 
 @keyframes spin{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
 }
 
 /* container aplikasi */
-
 .container{
-width:100%;
-height:100vh;
+  width:100%;
+  height:100vh;
 }
 
 @media (min-width:769px){
-.container{
-zoom:85%;
-height:118vh;
-}
+  .container{
+    zoom:85%;
+    height:118vh;
+  }
 }
 
 @media (max-width:768px){
+  html,body{
+    overflow:auto;
+  }
 
-html,body{
-overflow:auto;
-}
-
-.container{
-zoom:100%;
-height:100vh;
-}
-
+  .container{
+    zoom:100%;
+    height:100vh;
+  }
 }
 
 iframe{
-width:100%;
-height:100%;
-border:none;
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
 }
-
 </style>
 </head>
 
 <body>
 
 <div id="splash">
-
-<img class="logo"
-src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/LAWERO-BAJU-BARU.png">
-
-<div class="loader"></div>
-
+  <img class="logo" src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/bukutamu.png" alt="Splash">
+  <div class="loader"></div>
 </div>
 
+<audio id="splashAudio" preload="auto">
+  <source src="https://raw.githubusercontent.com/lapasbaubau/jamlabubu/refs/heads/main/VOICEJAMLABUBU.WAV" type="audio/wav">
+</audio>
 
 <div class="container">
-
-<iframe
-src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
-allowfullscreen>
-</iframe>
-
+  <iframe
+    src="https://script.google.com/macros/s/AKfycbz2X-MBKhV3oaKrDT6zlTBIAvspowbLer5bwZBsSrNmoF_Dt5gaJfyAoUFBoydGkzE/exec"
+    allowfullscreen>
+  </iframe>
 </div>
 
-
 <script>
+const audio = document.getElementById("splashAudio");
+const splash = document.getElementById("splash");
 
+/* coba putar suara saat splash muncul */
+window.addEventListener("load", function () {
+  audio.play().catch(function(err){
+    console.log("Autoplay diblokir browser:", err);
+  });
+});
+
+/* cadangan: jika user klik layar, audio ikut jalan */
+document.addEventListener("click", function(){
+  if (audio.paused) {
+    audio.play().catch(function(){});
+  }
+}, { once:true });
+
+/* hilangkan splash */
 setTimeout(function(){
+  splash.style.opacity = "0";
+  splash.style.transition = "opacity 1s";
 
-document.getElementById("splash").style.opacity="0";
-document.getElementById("splash").style.transition="opacity 1s";
-
-setTimeout(function(){
-document.getElementById("splash").style.display="none";
-},1000);
-
+  setTimeout(function(){
+    splash.style.display = "none";
+  },1000);
 },3000);
-
 </script>
 
 </body>
